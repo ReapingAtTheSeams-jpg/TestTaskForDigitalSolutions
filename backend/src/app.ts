@@ -15,6 +15,10 @@ const app: Express = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/healthz', (_req, res) => {
+    res.status(200).json({ status: 'ok' });
+});
+
 app.get('/api/health', (_req: Request, res: Response) => {
     res.json({
         status: 'ok',
