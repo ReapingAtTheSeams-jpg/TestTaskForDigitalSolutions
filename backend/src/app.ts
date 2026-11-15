@@ -25,7 +25,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
 app.use('/api/items', itemsRouter);
 app.use('/api/selected', selectedRouter);
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
