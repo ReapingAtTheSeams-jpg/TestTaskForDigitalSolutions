@@ -117,7 +117,14 @@ router.patch('/reorder', (req: Request, res: Response) => {
 });
 
 router.get('/operations/:requestId', (req: Request, res: Response) => {
-    const job = operationJobs.get(req.params.requestId);
+    const requestId = req.params.requestId;
+
+    if (typeof requestId !== 'string') {
+        res.status(400).json({ error: 'Invalid request ID' });
+        return;
+    }
+
+    const job = operationJobs.get(requestId);
 
     if (!job) {
         res.status(404).json({ error: 'Request not found' });

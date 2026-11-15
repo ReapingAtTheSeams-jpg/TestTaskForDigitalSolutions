@@ -70,7 +70,14 @@ router.post('/', (req: Request, res: Response) => {
 });
 
 router.get('/add-status/:requestId', (req: Request, res: Response) => {
-    const job = addJobs.get(req.params.requestId);
+    const requestId = req.params.requestId;
+
+    if (typeof requestId !== 'string') {
+        res.status(400).json({ error: 'Invalid request ID' });
+        return;
+    }
+
+    const job = addJobs.get(requestId);
 
     if (!job) {
         res.status(404).json({ error: 'Request not found' });
